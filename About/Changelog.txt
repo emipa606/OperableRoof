@@ -1,4 +1,7 @@
 # Changelog for OperableRoof
 
+1.4.1 - Too large preview, trying again
+
+
 1.4.0 - First publish
 

@@ -2,7 +2,7 @@
 <ModSyncNinjaData>
   <ID>604063b3-07b3-4032-ba7e-547b2dbc2eab</ID>
   <ModName>Operable Roof (Continued)</ModName>
-  <Version>1.4.0</Version>
+  <Version>1.4.1</Version>
   <SaveBreaking>False</SaveBreaking>
   <Host name="Github">
     <Owner>emipa606</Owner>
@@ -12,7 +12,3 @@
     <Branch>master</Branch>
   </Host>
 </ModSyncNinjaData>
-
-
-
-
