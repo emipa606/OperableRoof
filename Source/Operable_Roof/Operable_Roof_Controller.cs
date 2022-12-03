@@ -10,37 +10,68 @@ namespace Operable_Roof;
 [StaticConstructorOnStartup]
 public class Operable_Roof_Controller : Building
 {
-    public static readonly Texture2D UI_OPEN;
+    public static readonly Texture2D OpenGizmoTexture2D;
 
-    public static readonly Texture2D UI_CLOSE;
+    public static readonly Texture2D CloseGizmoTexture2D;
 
-    public bool CLOSESET = true;
+    public static readonly Texture2D AutoOpenTimeGizmoTexture2D;
+
+    public static readonly Texture2D AutoCloseTimeGizmoTexture2D;
+
+    public static readonly Texture2D AutoOpenTempGizmoTexture2D;
+
+    public static readonly Texture2D AutoCloseTempGizmoTexture2D;
+
+    public bool CanClose = true;
+
+    public bool CanOpen = true;
+    private int closeOnTimer;
 
     private List<Operable_Roof> connectedBuildings;
-
-    public bool OPENSET = true;
+    private int openOnTimer;
 
     private CompPowerTrader Power;
 
     static Operable_Roof_Controller()
     {
-        UI_OPEN = ContentFinder<Texture2D>.Get("UI/OPEN");
-        UI_CLOSE = ContentFinder<Texture2D>.Get("UI/CLOSE");
+        OpenGizmoTexture2D = ContentFinder<Texture2D>.Get("UI/OPEN");
+        CloseGizmoTexture2D = ContentFinder<Texture2D>.Get("UI/CLOSE");
+        AutoOpenTimeGizmoTexture2D = ContentFinder<Texture2D>.Get("UI/autoopentimer");
+        AutoCloseTimeGizmoTexture2D = ContentFinder<Texture2D>.Get("UI/autoclosetimer");
+        AutoOpenTempGizmoTexture2D = ContentFinder<Texture2D>.Get("UI/autoopentemp");
+        AutoCloseTempGizmoTexture2D = ContentFinder<Texture2D>.Get("UI/autoclosetemp");
     }
 
     public override string GetInspectString()
     {
         var stringBuilder = new StringBuilder();
         stringBuilder.AppendLine(base.GetInspectString());
-        stringBuilder.AppendLine($"Connected to {connectedBuildings.Count} roofs");
+        stringBuilder.AppendLine("OpRo.ConnectedTo".Translate(connectedBuildings.Count));
+        if (openOnTimer > -1)
+        {
+            stringBuilder.AppendLine("OpRo.OpensTimer".Translate(openOnTimer));
+        }
+
+        if (closeOnTimer > -1)
+        {
+            stringBuilder.AppendLine("OpRo.ClosesTimer".Translate(closeOnTimer));
+        }
+
         return stringBuilder.ToString().TrimEndNewlines();
     }
 
-    public override void TickRare()
+    public override void Tick()
     {
-        base.TickRare();
+        base.Tick();
+        if (GenTicks.TicksGame % GenTicks.TickRareInterval != 0)
+        {
+            return;
+        }
+
         updateConnectedBuildings();
+        checkAutomaticRules();
     }
+
 
     public override void DrawExtraSelectionOverlays()
     {
@@ -59,6 +90,14 @@ public class Operable_Roof_Controller : Building
         }
     }
 
+
+    public override void ExposeData()
+    {
+        base.ExposeData();
+        Scribe_Values.Look(ref openOnTimer, "openOnTimer", -1);
+        Scribe_Values.Look(ref closeOnTimer, "closeOnTimer", -1);
+    }
+
     public override IEnumerable<Gizmo> GetGizmos()
     {
         foreach (var gizmo in base.GetGizmos())
@@ -66,27 +105,94 @@ public class Operable_Roof_Controller : Building
             yield return gizmo;
         }
 
-        if (OPENSET)
+        if (CanOpen)
         {
             yield return new Command_Action
             {
-                action = OPEN,
-                defaultLabel = "OPEN",
-                defaultDesc = "Work",
-                icon = UI_OPEN
+                action = open,
+                defaultLabel = "OpRo.OpenRoofs".Translate(),
+                defaultDesc = "OpRo.OpenRoofsTT".Translate(),
+                icon = OpenGizmoTexture2D
             };
         }
 
-        if (CLOSESET)
+        if (CanClose)
         {
             yield return new Command_Action
             {
-                action = CLOSE,
-                defaultLabel = "CLOSE",
-                defaultDesc = "Work",
-                icon = UI_CLOSE
+                action = close,
+                defaultLabel = "OpRo.CloseRoofs".Translate(),
+                defaultDesc = "OpRo.CloseRoofsTT".Translate(),
+                icon = CloseGizmoTexture2D
             };
         }
+
+        yield return new Command_Action
+        {
+            action = delegate { getTimerDropDown(true); },
+            defaultLabel = "OpRo.OpenTimerButton".Translate(getTimeString(openOnTimer)),
+            defaultDesc = "OpRo.OpenTimerButtonTT".Translate(),
+            icon = AutoOpenTimeGizmoTexture2D
+        };
+
+        yield return new Command_Action
+        {
+            action = delegate { getTimerDropDown(false); },
+            defaultLabel = "OpRo.CloseTimerButton".Translate(getTimeString(closeOnTimer)),
+            defaultDesc = "OpRo.CloseTimerButtonTT".Translate(),
+            icon = AutoCloseTimeGizmoTexture2D
+        };
+    }
+
+
+    private string getTimeString(int timeInt)
+    {
+        if (timeInt == -1)
+        {
+            return "OpRo.Never".Translate();
+        }
+
+        return $"{timeInt}H";
+    }
+
+    private void getTimerDropDown(bool open)
+    {
+        var list = new List<FloatMenuOption>();
+        for (var i = 0; i < 24; i++)
+        {
+            if (open && i == closeOnTimer ||
+                !open && i == openOnTimer)
+            {
+                continue;
+            }
+
+            var timer = i;
+            list.Add(new FloatMenuOption($"{i}H", delegate
+            {
+                if (open)
+                {
+                    openOnTimer = timer;
+                }
+                else
+                {
+                    closeOnTimer = timer;
+                }
+            }));
+        }
+
+        list.Add(new FloatMenuOption("OpRo.Never".Translate(), delegate
+        {
+            if (open)
+            {
+                openOnTimer = -1;
+            }
+            else
+            {
+                closeOnTimer = -1;
+            }
+        }));
+
+        Find.WindowStack.Add(new FloatMenu(list));
     }
 
     public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -97,13 +203,15 @@ public class Operable_Roof_Controller : Building
             Power = GetComp<CompPowerTrader>();
         }
 
+        openOnTimer = -1;
+        closeOnTimer = -1;
         updateConnectedBuildings();
     }
 
     public void updateConnectedBuildings()
     {
         connectedBuildings = new List<Operable_Roof>();
-        foreach (var intVec3 in CellRect.CenteredOn(InteractionCell, 15))
+        foreach (var intVec3 in CellRect.CenteredOn(Position, 15))
         {
             foreach (var building in intVec3.GetThingList(Find.CurrentMap).ToList())
             {
@@ -115,19 +223,33 @@ public class Operable_Roof_Controller : Building
         }
     }
 
-    private void OPEN()
+    private void checkAutomaticRules()
+    {
+        if (openOnTimer != -1 && CanOpen && GenLocalDate.HourOfDay(Map) == openOnTimer)
+        {
+            open();
+            return;
+        }
+
+        if (closeOnTimer != -1 && CanClose && GenLocalDate.HourOfDay(Map) == closeOnTimer)
+        {
+            close();
+        }
+    }
+
+    private void open()
     {
         var power = Power;
         if (power is { PowerOn: false })
         {
-            Messages.Message("Can not work", MessageTypeDefOf.RejectInput);
-            OPENSET = true;
-            CLOSESET = false;
+            Messages.Message("CannotUseNoPower".Translate(), MessageTypeDefOf.RejectInput);
+            CanOpen = true;
+            CanClose = false;
             return;
         }
 
-        OPENSET = false;
-        CLOSESET = true;
+        CanOpen = false;
+        CanClose = true;
 
         updateConnectedBuildings();
         foreach (var operable_Roof in connectedBuildings)
@@ -136,19 +258,19 @@ public class Operable_Roof_Controller : Building
         }
     }
 
-    private void CLOSE()
+    private void close()
     {
         var power = Power;
         if (power is { PowerOn: false })
         {
-            Messages.Message("Can not work", MessageTypeDefOf.RejectInput);
-            OPENSET = false;
-            CLOSESET = true;
+            Messages.Message("CannotUseNoPower".Translate(), MessageTypeDefOf.RejectInput);
+            CanOpen = false;
+            CanClose = true;
             return;
         }
 
-        OPENSET = true;
-        CLOSESET = false;
+        CanOpen = true;
+        CanClose = false;
 
         updateConnectedBuildings();
         foreach (var operable_Roof in connectedBuildings)

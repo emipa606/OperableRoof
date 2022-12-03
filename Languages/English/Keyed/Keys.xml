@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <OpRo.ConnectedTo>Connected to {0} roofs</OpRo.ConnectedTo>
+  <OpRo.Never>Never</OpRo.Never>
+  <OpRo.OpenTimerButton>Autoopen: {0}</OpRo.OpenTimerButton>
+  <OpRo.OpenTimerButtonTT>All connected and powered roofs will open at the selected time</OpRo.OpenTimerButtonTT>
+  <OpRo.CloseTimerButton>Autoclose: {0}</OpRo.CloseTimerButton>
+  <OpRo.CloseTimerButtonTT>All connected and powered roofs will close at the selected time</OpRo.CloseTimerButtonTT>
+  <OpRo.OpensTimer>Automatically opens at {0}H</OpRo.OpensTimer>
+  <OpRo.ClosesTimer>Automatically closes at {0}H</OpRo.ClosesTimer>
+  <OpRo.SmallerRadius>Smaller radius</OpRo.SmallerRadius>
+  <OpRo.SmallerRadiusTT>Lower the radius of the roof</OpRo.SmallerRadiusTT>
+  <OpRo.LargerRadius>Larger radius</OpRo.LargerRadius>
+  <OpRo.LargerRadiusTT>Increases the radius of the roof</OpRo.LargerRadiusTT>
+  <OpRo.OpenRoofs>Open roofs</OpRo.OpenRoofs>
+  <OpRo.OpenRoofsTT>Opens all connected and powered roofs</OpRo.OpenRoofsTT>
+  <OpRo.CloseRoofs>Close roofs</OpRo.CloseRoofs>
+  <OpRo.CloseRoofsTT>Close all connected and powered roofs</OpRo.CloseRoofsTT>
+</LanguageData>

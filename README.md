@@ -42,17 +42,12 @@ Please comment at that time.
 
 This is rimworld mod.
 This is the first original mod.
-If you support for me, please click this link : https://www.buymeacoffee.com/drilledhead
 
 this video mod list:
 https://steamcommunity.com/sharedfiles/filedetails/?id=1845423808
 https://steamcommunity.com/sharedfiles/filedetails/?id=2558766404
 https://steamcommunity.com/sharedfiles/filedetails/?id=867467808
 
-
-
-if you want no animation version :
-https://steamcommunity.com/sharedfiles/filedetails/?id=2810227980
 	
 ![Image](https://i.imgur.com/PwoNOj4.png)
 
@@ -64,5 +59,4 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2810227980
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
-
-https://steamcommunity.com/sharedfiles/filedetails/changelog/2896531741]Last updated 2022-12-02
+[/listhttps://steamcommunity.com/sharedfiles/filedetails/changelog/2896531741]Last updated 2022-12-03

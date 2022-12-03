@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace Operable_Roof;
@@ -11,9 +13,13 @@ public class Operable_Roof : Building
 
     public bool CLOSESET = true;
 
+    private bool elonger;
+
     public bool OPENSET = true;
 
     public CompPowerTrader Power;
+
+    private int range = 5;
 
     private RoofDef roofToSet;
 
@@ -45,7 +51,7 @@ public class Operable_Roof : Building
             Power = GetComp<CompPowerTrader>();
         }
 
-        foreach (var intVec3 in CellRect.CenteredOn(InteractionCell, 15))
+        foreach (var intVec3 in CellRect.CenteredOn(Position, range))
         {
             foreach (var building in intVec3.GetThingList(Find.CurrentMap).ToList())
             {
@@ -54,6 +60,69 @@ public class Operable_Roof : Building
                     operable_Roof_Controller.updateConnectedBuildings();
                 }
             }
+        }
+    }
+
+    private void changeRange(bool increase)
+    {
+        var isOpen = Find.CurrentMap.roofGrid.RoofAt(Position) != null;
+        if (isOpen)
+        {
+            foreach (var intVec3 in CellRect.CenteredOn(Position, range))
+            {
+                Find.CurrentMap.roofGrid.SetRoof(intVec3, null);
+            }
+        }
+
+        if (increase)
+        {
+            range++;
+        }
+        else
+        {
+            range--;
+        }
+
+        if (!isOpen)
+        {
+            return;
+        }
+
+        foreach (var intVec3 in CellRect.CenteredOn(Position, range))
+        {
+            Find.CurrentMap.roofGrid.SetRoof(intVec3, roofToSet);
+        }
+    }
+
+    public override IEnumerable<Gizmo> GetGizmos()
+    {
+        foreach (var gizmo in base.GetGizmos())
+        {
+            yield return gizmo;
+        }
+
+        if (range > 1)
+        {
+            yield return new Command_Action
+            {
+                action = delegate { changeRange(false); },
+                defaultLabel = "OpRo.SmallerRadius".Translate(),
+                defaultDesc = "OpRo.SmallerRadiusTT".Translate(),
+                hotKey = KeyBindingDefOf.Misc5,
+                icon = ContentFinder<Texture2D>.Get("UI/smaller")
+            };
+        }
+
+        if (range < 5)
+        {
+            yield return new Command_Action
+            {
+                action = delegate { changeRange(true); },
+                defaultLabel = "OpRo.LargerRadius".Translate(),
+                defaultDesc = "OpRo.LargerRadiusTT".Translate(),
+                hotKey = KeyBindingDefOf.Misc4,
+                icon = ContentFinder<Texture2D>.Get("UI/larger")
+            };
         }
     }
 
@@ -67,47 +136,65 @@ public class Operable_Roof : Building
         CLOSESET = !CLOSESET;
     }
 
-    private void Animation()
+    private void OpenAnimation()
     {
-        var radius = timer / 5;
-        foreach (var item in CellRect.CenteredOn(InteractionCell, radius))
+        var radius = timer;
+        foreach (var intVec3 in CellRect.CenteredOn(Position, radius))
         {
-            Find.CurrentMap.roofGrid.SetRoof(item, null);
-            FloodFillerFog.FloodUnfog(item, Find.CurrentMap);
+            Find.CurrentMap.roofGrid.SetRoof(intVec3, null);
+            FloodFillerFog.FloodUnfog(intVec3, Find.CurrentMap);
         }
     }
 
-    private void Animation2()
+    private void CloseAnimation()
     {
-        var num = timer / 5;
-        var num2 = 5 - num;
-        foreach (var item in CellRect.CenteredOn(InteractionCell, num2))
+        var num = timer;
+        var num2 = range - num;
+        foreach (var intVec3 in CellRect.CenteredOn(Position, num2))
         {
-            Find.CurrentMap.roofGrid.SetRoof(item, roofToSet);
+            Find.CurrentMap.roofGrid.SetRoof(intVec3, roofToSet);
         }
 
-        foreach (var item2 in CellRect.CenteredOn(InteractionCell, num2 - 1))
+        foreach (var intVec3 in CellRect.CenteredOn(Position, num2 - 1))
         {
-            Find.CurrentMap.roofGrid.SetRoof(item2, null);
+            Find.CurrentMap.roofGrid.SetRoof(intVec3, null);
         }
+    }
+
+    public override void DrawExtraSelectionOverlays()
+    {
+        base.DrawExtraSelectionOverlays();
+        GenDraw.DrawFieldEdges(CellRect.CenteredOn(Position, range).Cells.ToList());
+    }
+
+    public override void ExposeData()
+    {
+        base.ExposeData();
+        Scribe_Values.Look(ref range, "range", 5);
     }
 
     public override void Tick()
     {
         base.Tick();
+        elonger = !elonger;
+        if (elonger)
+        {
+            return;
+        }
+
         if (!CLOSESET)
         {
             var power = Power;
             if (power is { PowerOn: false })
             {
-                Messages.Message("Can not work", MessageTypeDefOf.RejectInput);
+                Messages.Message("CannotUseNoPower".Translate(), MessageTypeDefOf.RejectInput);
                 CLOSESET = true;
                 return;
             }
 
-            Animation2();
+            CloseAnimation();
             timer++;
-            if (timer >= 30)
+            if (timer > range)
             {
                 CLOSESET = true;
                 timer = 0;
@@ -122,14 +209,14 @@ public class Operable_Roof : Building
         var power2 = Power;
         if (power2 is { PowerOn: false })
         {
-            Messages.Message("Can not work", MessageTypeDefOf.RejectInput);
+            Messages.Message("CannotUseNoPower".Translate(), MessageTypeDefOf.RejectInput);
             OPENSET = true;
             return;
         }
 
-        Animation();
+        OpenAnimation();
         timer++;
-        if (timer < 30)
+        if (timer <= range)
         {
             return;
         }

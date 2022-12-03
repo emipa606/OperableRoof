@@ -29,8 +29,8 @@
     <designationCategory>Structure</designationCategory>
     <staticSunShadowHeight>1.0</staticSunShadowHeight>
     <blockLight>true</blockLight>
-    <interactionCellOffset>(0,0,0)</interactionCellOffset>
-    <hasInteractionCell>true</hasInteractionCell>
+    <!-- <interactionCellOffset>(0,0,0)</interactionCellOffset> -->
+    <hasInteractionCell>false</hasInteractionCell>
     <canOverlapZones>false</canOverlapZones>
     <fertility>0</fertility>
     <size>(1,1)</size>
@@ -60,6 +60,7 @@
     </researchPrerequisites>
     <placeWorkers>
       <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+      <li>Operable_Roof.PlaceWorker_OperatableRoof</li>
     </placeWorkers>
     <designationHotKey>Misc3</designationHotKey>
   </ThingDef>
@@ -162,7 +163,6 @@
     <thingClass>Operable_Roof.Operable_Roof_Controller</thingClass>
     <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>
-    <tickerType>Normal</tickerType>
     <pathCost>50</pathCost>
     <statBases>
       <MaxHitPoints>300</MaxHitPoints>
@@ -199,6 +199,8 @@
       </damageData>
     </graphicData>
     <castEdgeShadows>true</castEdgeShadows>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
     <staticSunShadowHeight>0.20</staticSunShadowHeight>
     <fillPercent>0.5</fillPercent>
     <interactionCellOffset>(0,0,-1)</interactionCellOffset>
@@ -210,6 +212,7 @@
     <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
     <placeWorkers>
       <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+      <li>Operable_Roof.PlaceWorker_OperatableRoofController</li>
     </placeWorkers>
     <researchPrerequisites>
       <li>Fabrication</li>
