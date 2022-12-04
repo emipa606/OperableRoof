@@ -1,5 +1,9 @@
 # Changelog for OperableRoof
 
+1.4.3 - Added temperature logic to the controller.
+Used DeepL to update translations for ChineseSimplified, French, German, Russian
+
+
 1.4.2 - Added placeworkers, visibility of range, selectable roof-size and automatic close and open by timer.
 Used DeepL to update translations for ChineseSimplified, French, German, Russian
 

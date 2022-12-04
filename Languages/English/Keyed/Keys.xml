@@ -2,10 +2,16 @@
 <LanguageData>
   <OpRo.ConnectedTo>Connected to {0} roofs</OpRo.ConnectedTo>
   <OpRo.Never>Never</OpRo.Never>
+  <OpRo.SelectOpenTemp>Define a temperature range to automatically open</OpRo.SelectOpenTemp>
+  <OpRo.SelectCloseTemp>Define a temperature range to automatically close</OpRo.SelectCloseTemp>
+  <OpRo.TempButton>Temperature logic</OpRo.TempButton>
+  <OpRo.TempButtonTT>Select a range to either open or close the roof, only one range will be used</OpRo.TempButtonTT>
   <OpRo.OpenTimerButton>Autoopen: {0}</OpRo.OpenTimerButton>
   <OpRo.OpenTimerButtonTT>All connected and powered roofs will open at the selected time</OpRo.OpenTimerButtonTT>
   <OpRo.CloseTimerButton>Autoclose: {0}</OpRo.CloseTimerButton>
   <OpRo.CloseTimerButtonTT>All connected and powered roofs will close at the selected time</OpRo.CloseTimerButtonTT>
+  <OpRo.OpensTemp>Automatically opens between {0} and {1}, closed otherwise</OpRo.OpensTemp>
+  <OpRo.ClosesTemp>Automatically closes between {0} and {1}, opened otherwise</OpRo.ClosesTemp>
   <OpRo.OpensTimer>Automatically opens at {0}H</OpRo.OpensTimer>
   <OpRo.ClosesTimer>Automatically closes at {0}H</OpRo.ClosesTimer>
   <OpRo.SmallerRadius>Smaller radius</OpRo.SmallerRadius>

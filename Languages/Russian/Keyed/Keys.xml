@@ -17,4 +17,10 @@
   <OpRo.OpenRoofsTT>Открывает все подключенные и приводимые в действие крыши</OpRo.OpenRoofsTT>
   <OpRo.CloseRoofs>Закрытые крыши</OpRo.CloseRoofs>
   <OpRo.CloseRoofsTT>Закройте все соединенные и приводимые в действие крыши</OpRo.CloseRoofsTT>
+  <OpRo.SelectOpenTemp>Определите диапазон температур для автоматического открытия</OpRo.SelectOpenTemp>
+  <OpRo.SelectCloseTemp>Определите диапазон температур для автоматического закрытия</OpRo.SelectCloseTemp>
+  <OpRo.TempButton>Температурная логика</OpRo.TempButton>
+  <OpRo.TempButtonTT>Выберите диапазон для открытия или закрытия крыши, будет использоваться только один диапазон</OpRo.TempButtonTT>
+  <OpRo.OpensTemp>Автоматически открывается между {0} и {1}, в противном случае закрывается</OpRo.OpensTemp>
+  <OpRo.ClosesTemp>Автоматически закрывается между {0} и {1}, открывается в противном случае</OpRo.ClosesTemp>
 </LanguageData>

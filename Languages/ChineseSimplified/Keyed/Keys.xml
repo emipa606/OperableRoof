@@ -17,4 +17,10 @@
   <OpRo.OpenRoofsTT>打开所有连接和供电的屋顶</OpRo.OpenRoofsTT>
   <OpRo.CloseRoofs>关闭的屋顶</OpRo.CloseRoofs>
   <OpRo.CloseRoofsTT>关闭所有连接和供电的屋顶</OpRo.CloseRoofsTT>
+  <OpRo.SelectOpenTemp>定义一个温度范围来自动打开</OpRo.SelectOpenTemp>
+  <OpRo.SelectCloseTemp>定义一个温度范围来自动关闭</OpRo.SelectCloseTemp>
+  <OpRo.TempButton>温度逻辑</OpRo.TempButton>
+  <OpRo.TempButtonTT>选择一个范围来打开或关闭屋顶，只有一个范围会被使用。</OpRo.TempButtonTT>
+  <OpRo.OpensTemp>在{0}和{1}之间自动打开，否则关闭</OpRo.OpensTemp>
+  <OpRo.ClosesTemp>在{0}和{1}之间自动关闭，否则打开</OpRo.ClosesTemp>
 </LanguageData>

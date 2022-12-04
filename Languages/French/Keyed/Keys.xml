@@ -17,4 +17,10 @@
   <OpRo.OpenRoofsTT>Ouvre tous les toits connectés et alimentés</OpRo.OpenRoofsTT>
   <OpRo.CloseRoofs>Toits fermés</OpRo.CloseRoofs>
   <OpRo.CloseRoofsTT>Fermer toutes les toitures connectées et alimentées</OpRo.CloseRoofsTT>
+  <OpRo.SelectOpenTemp>Définir une plage de température pour l'ouverture automatique</OpRo.SelectOpenTemp>
+  <OpRo.SelectCloseTemp>Définir une plage de température pour fermer automatiquement</OpRo.SelectCloseTemp>
+  <OpRo.TempButton>Logique de température</OpRo.TempButton>
+  <OpRo.TempButtonTT>Sélectionnez une plage pour ouvrir ou fermer le toit, une seule plage sera utilisée.</OpRo.TempButtonTT>
+  <OpRo.OpensTemp>S'ouvre automatiquement entre {0} et {1}, fermé sinon.</OpRo.OpensTemp>
+  <OpRo.ClosesTemp>Se ferme automatiquement entre {0} et {1}, ouvert sinon.</OpRo.ClosesTemp>
 </LanguageData>

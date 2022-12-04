@@ -18,17 +18,18 @@ public class Operable_Roof_Controller : Building
 
     public static readonly Texture2D AutoCloseTimeGizmoTexture2D;
 
-    public static readonly Texture2D AutoOpenTempGizmoTexture2D;
-
-    public static readonly Texture2D AutoCloseTempGizmoTexture2D;
+    public static readonly Texture2D AutoTempGizmoTexture2D;
 
     public bool CanClose = true;
 
     public bool CanOpen = true;
     private int closeOnTimer;
+    private FloatRange closeTempFloatRange;
 
     private List<Operable_Roof> connectedBuildings;
     private int openOnTimer;
+
+    private FloatRange openTempFloatRange;
 
     private CompPowerTrader Power;
 
@@ -38,8 +39,7 @@ public class Operable_Roof_Controller : Building
         CloseGizmoTexture2D = ContentFinder<Texture2D>.Get("UI/CLOSE");
         AutoOpenTimeGizmoTexture2D = ContentFinder<Texture2D>.Get("UI/autoopentimer");
         AutoCloseTimeGizmoTexture2D = ContentFinder<Texture2D>.Get("UI/autoclosetimer");
-        AutoOpenTempGizmoTexture2D = ContentFinder<Texture2D>.Get("UI/autoopentemp");
-        AutoCloseTempGizmoTexture2D = ContentFinder<Texture2D>.Get("UI/autoclosetemp");
+        AutoTempGizmoTexture2D = ContentFinder<Texture2D>.Get("UI/autotemp");
     }
 
     public override string GetInspectString()
@@ -47,6 +47,19 @@ public class Operable_Roof_Controller : Building
         var stringBuilder = new StringBuilder();
         stringBuilder.AppendLine(base.GetInspectString());
         stringBuilder.AppendLine("OpRo.ConnectedTo".Translate(connectedBuildings.Count));
+
+        if (openTempFloatRange != FloatRange.Zero)
+        {
+            stringBuilder.AppendLine("OpRo.OpensTemp".Translate(openTempFloatRange.min.ToStringTemperature(),
+                openTempFloatRange.max.ToStringTemperature()));
+        }
+
+        if (closeTempFloatRange != FloatRange.Zero)
+        {
+            stringBuilder.AppendLine("OpRo.ClosesTemp".Translate(closeTempFloatRange.min.ToStringTemperature(),
+                closeTempFloatRange.max.ToStringTemperature()));
+        }
+
         if (openOnTimer > -1)
         {
             stringBuilder.AppendLine("OpRo.OpensTimer".Translate(openOnTimer));
@@ -96,6 +109,8 @@ public class Operable_Roof_Controller : Building
         base.ExposeData();
         Scribe_Values.Look(ref openOnTimer, "openOnTimer", -1);
         Scribe_Values.Look(ref closeOnTimer, "closeOnTimer", -1);
+        Scribe_Values.Look(ref openTempFloatRange, "openTempFloatRange", FloatRange.Zero);
+        Scribe_Values.Look(ref closeTempFloatRange, "closeTempFloatRange", FloatRange.Zero);
     }
 
     public override IEnumerable<Gizmo> GetGizmos()
@@ -129,6 +144,60 @@ public class Operable_Roof_Controller : Building
 
         yield return new Command_Action
         {
+            action = delegate
+            {
+                var list = new List<FloatMenuOption>
+                {
+                    new FloatMenuOption("OpRo.SelectOpenTemp".Translate(),
+                        delegate
+                        {
+                            var dialogFloatRangeSlider = new Dialog_FloatRangeSlider("OpRo.SelectOpenTemp".Translate(),
+                                GenTemperature.MinTemperatureAtTile(Map.Tile) * 2,
+                                GenTemperature.MaxTemperatureAtTile(Map.Tile) * 2, openTempFloatRange,
+                                delegate(FloatRange range)
+                                {
+                                    if (range == FloatRange.Zero)
+                                    {
+                                        return;
+                                    }
+
+                                    openTempFloatRange = range;
+                                    closeTempFloatRange = FloatRange.Zero;
+                                    openOnTimer = -1;
+                                    closeOnTimer = -1;
+                                });
+                            Find.WindowStack.Add(dialogFloatRangeSlider);
+                        }),
+                    new FloatMenuOption("OpRo.SelectCloseTemp".Translate(),
+                        delegate
+                        {
+                            var dialogFloatRangeSlider = new Dialog_FloatRangeSlider("OpRo.SelectCloseTemp".Translate(),
+                                GenTemperature.MinTemperatureAtTile(Map.Tile) * 2,
+                                GenTemperature.MaxTemperatureAtTile(Map.Tile) * 2, closeTempFloatRange,
+                                delegate(FloatRange range)
+                                {
+                                    if (range == FloatRange.Zero)
+                                    {
+                                        return;
+                                    }
+
+                                    closeTempFloatRange = range;
+                                    openTempFloatRange = FloatRange.Zero;
+                                    openOnTimer = -1;
+                                    closeOnTimer = -1;
+                                });
+                            Find.WindowStack.Add(dialogFloatRangeSlider);
+                        })
+                };
+                Find.WindowStack.Add(new FloatMenu(list));
+            },
+            defaultLabel = "OpRo.TempButton".Translate(getTimeString(openOnTimer)),
+            defaultDesc = "OpRo.TempButtonTT".Translate(),
+            icon = AutoTempGizmoTexture2D
+        };
+
+        yield return new Command_Action
+        {
             action = delegate { getTimerDropDown(true); },
             defaultLabel = "OpRo.OpenTimerButton".Translate(getTimeString(openOnTimer)),
             defaultDesc = "OpRo.OpenTimerButtonTT".Translate(),
@@ -155,6 +224,7 @@ public class Operable_Roof_Controller : Building
         return $"{timeInt}H";
     }
 
+
     private void getTimerDropDown(bool open)
     {
         var list = new List<FloatMenuOption>();
@@ -177,6 +247,9 @@ public class Operable_Roof_Controller : Building
                 {
                     closeOnTimer = timer;
                 }
+
+                closeTempFloatRange = FloatRange.Zero;
+                openTempFloatRange = FloatRange.Zero;
             }));
         }
 
@@ -225,6 +298,46 @@ public class Operable_Roof_Controller : Building
 
     private void checkAutomaticRules()
     {
+        if (openTempFloatRange != FloatRange.Zero)
+        {
+            if (openTempFloatRange.Includes(Map.mapTemperature.OutdoorTemp))
+            {
+                if (CanOpen)
+                {
+                    open();
+                }
+
+                return;
+            }
+
+            if (CanClose)
+            {
+                close();
+            }
+
+            return;
+        }
+
+        if (closeTempFloatRange != FloatRange.Zero)
+        {
+            if (closeTempFloatRange.Includes(Map.mapTemperature.OutdoorTemp))
+            {
+                if (CanClose)
+                {
+                    close();
+                }
+
+                return;
+            }
+
+            if (CanOpen)
+            {
+                open();
+            }
+
+            return;
+        }
+
         if (openOnTimer != -1 && CanOpen && GenLocalDate.HourOfDay(Map) == openOnTimer)
         {
             open();

@@ -9,6 +9,9 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2809986778
 - Added one buildable roof for each roof-type with hopefully balanced stats
 - Added a buildable roof that uses the ship-roof in https://steamcommunity.com/workshop/filedetails/?id=1909914131]Save Our Ship 2 if loaded
 - Added indicators to the controllers to show what roofs are connected
+- Added roof-size indicator when selected
+- Added option to change the roof-size per roof-pillar
+- Added option to automatically close and open roofs based on time of day
 
 ![Image](https://i.imgur.com/pufA0kM.png)
 
@@ -59,4 +62,4 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=867467808
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
-[/listhttps://steamcommunity.com/sharedfiles/filedetails/changelog/2896531741]Last updated 2022-12-03
+[/lishttps://steamcommunity.com/sharedfiles/filedetails/changelog/2896531741]Last updated 2022-12-04

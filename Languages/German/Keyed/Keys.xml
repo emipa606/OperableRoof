@@ -17,4 +17,10 @@
   <OpRo.OpenRoofsTT>Öffnet alle angeschlossenen und angetriebenen Dächer</OpRo.OpenRoofsTT>
   <OpRo.CloseRoofs>Dächer schließen</OpRo.CloseRoofs>
   <OpRo.CloseRoofsTT>Schließen Sie alle angeschlossenen und angetriebenen Dächer</OpRo.CloseRoofsTT>
+  <OpRo.SelectOpenTemp>Definieren Sie einen Temperaturbereich zum automatischen Öffnen</OpRo.SelectOpenTemp>
+  <OpRo.SelectCloseTemp>Definieren Sie einen Temperaturbereich zum automatischen Schließen</OpRo.SelectCloseTemp>
+  <OpRo.TempButton>Temperatur-Logik</OpRo.TempButton>
+  <OpRo.TempButtonTT>Wählen Sie einen Bereich, um das Dach entweder zu öffnen oder zu schließen, es wird nur ein Bereich verwendet</OpRo.TempButtonTT>
+  <OpRo.OpensTemp>Automatisch geöffnet zwischen {0} und {1}, sonst geschlossen</OpRo.OpensTemp>
+  <OpRo.ClosesTemp>Schließt automatisch zwischen {0} und {1}, sonst geöffnet</OpRo.ClosesTemp>
 </LanguageData>
