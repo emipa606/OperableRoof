@@ -1,6 +1,5 @@
 # OperableRoof
 
-
 ![Image](https://i.imgur.com/buuPQel.png)
 
 Update of DRILLED_HEADs mod
@@ -12,6 +11,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2809986778
 - Added roof-size indicator when selected
 - Added option to change the roof-size per roof-pillar
 - Added option to automatically close and open roofs based on time of day
+- Added option to automatically close and open roofs based on temperature
 
 ![Image](https://i.imgur.com/pufA0kM.png)
 
@@ -62,4 +62,8 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=867467808
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
-[/lishttps://steamcommunity.com/sharedfiles/filedetails/changelog/2896531741]Last updated 2022-12-04
+
+
+
+[
+https://steamcommunity.com/sharedfiles/filedetails/changelog/2896531741]Last updated 2022-12-07

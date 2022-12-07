@@ -1,5 +1,8 @@
 # Changelog for OperableRoof
 
+1.4.4 - Roofpillars should no longer shortcirtcut
+
+
 1.4.3 - Added temperature logic to the controller.
 Used DeepL to update translations for ChineseSimplified, French, German, Russian
 

@@ -82,7 +82,7 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <shortCircuitInRain>true</shortCircuitInRain>
+        <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>200</basePowerConsumption>
       </li>
     </comps>
@@ -105,7 +105,7 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <shortCircuitInRain>true</shortCircuitInRain>
+        <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>300</basePowerConsumption>
       </li>
     </comps>
@@ -128,7 +128,7 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <shortCircuitInRain>true</shortCircuitInRain>
+        <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>600</basePowerConsumption>
       </li>
     </comps>
@@ -151,7 +151,7 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <shortCircuitInRain>true</shortCircuitInRain>
+        <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>300</basePowerConsumption>
       </li>
     </comps>
