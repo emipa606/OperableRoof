@@ -156,6 +156,49 @@
       </li>
     </comps>
   </ThingDef>
+  <ThingDef ParentName="OperableRoofBase" MayRequire="machine.rtr">
+    <defName>Operable_Roofe</defName>
+    <label>Operable Roof (steel roof)</label>
+    <description>Operable Roof, uses steel roof</description>
+    <statBases>
+      <MaxHitPoints>800</MaxHitPoints>
+      <WorkToBuild>305</WorkToBuild>
+    </statBases>
+    <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    <costList>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <Steel>1500</Steel>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>600</basePowerConsumption>
+      </li>
+    </comps>
+  </ThingDef>
+  <ThingDef ParentName="OperableRoofBase" MayRequire="machine.rtr">
+    <defName>Operable_Rooff</defName>
+    <label>Operable Roof (transparent roof)</label>
+    <description>Operable Roof, uses transparent roof</description>
+    <statBases>
+      <MaxHitPoints>800</MaxHitPoints>
+      <WorkToBuild>305</WorkToBuild>
+    </statBases>
+    <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    <costList>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <Steel>1100</Steel>
+      <Synthread>400</Synthread>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>600</basePowerConsumption>
+      </li>
+    </comps>
+  </ThingDef>
   <ThingDef ParentName="BuildingBase">
     <defName>Operable_Roof_Controller</defName>
     <label>Operable Roof Controller</label>

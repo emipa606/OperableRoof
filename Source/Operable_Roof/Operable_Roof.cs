@@ -43,6 +43,12 @@ public class Operable_Roof : Building
             case 'd':
                 roofToSet = DefDatabase<RoofDef>.GetNamedSilentFail("RoofShip");
                 break;
+            case 'e':
+                roofToSet = DefDatabase<RoofDef>.GetNamedSilentFail("RTR_RoofSteel");
+                break;
+            case 'f':
+                roofToSet = DefDatabase<RoofDef>.GetNamedSilentFail("RTR_RoofTransparent");
+                break;
         }
 
 

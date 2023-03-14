@@ -1,5 +1,8 @@
 # Changelog for OperableRoof
 
+1.4.5 - Added support for [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1776143665]Raise The Roof[/url]
+
+
 1.4.4 - Roofpillars should no longer shortcirtcut
 
 
