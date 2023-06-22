@@ -66,4 +66,4 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=867467808
 
 
 [
-https://steamcommunity.com/sharedfiles/filedetails/changelog/2896531741]Last updated 2023-03-14
+https://steamcommunity.com/sharedfiles/filedetails/changelog/2896531741]Last updated 2023-06-22

@@ -49,6 +49,9 @@ public class Operable_Roof : Building
             case 'f':
                 roofToSet = DefDatabase<RoofDef>.GetNamedSilentFail("RTR_RoofTransparent");
                 break;
+            case 'g':
+                roofToSet = DefDatabase<RoofDef>.GetNamedSilentFail("BMT_RockRoofStable");
+                break;
         }
 
 

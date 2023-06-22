@@ -199,6 +199,29 @@
       </li>
     </comps>
   </ThingDef>
+  <ThingDef ParentName="OperableRoofBase" MayRequire="BiomesTeam.BiomesCore">
+    <defName>Operable_Roofg</defName>
+    <label>Operable Roof (stable overhead mountain)</label>
+    <description>Operable Roof, uses stable overhead mountain</description>
+    <statBases>
+      <MaxHitPoints>800</MaxHitPoints>
+      <WorkToBuild>305</WorkToBuild>
+    </statBases>
+    <costList>
+      <ComponentIndustrial>20</ComponentIndustrial>
+    </costList>
+    <costStuffCount>1500</costStuffCount>
+    <stuffCategories>
+      <li>Stony</li>
+    </stuffCategories>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>600</basePowerConsumption>
+      </li>
+    </comps>
+  </ThingDef>
   <ThingDef ParentName="BuildingBase">
     <defName>Operable_Roof_Controller</defName>
     <label>Operable Roof Controller</label>
