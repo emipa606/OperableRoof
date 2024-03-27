@@ -283,7 +283,7 @@ public class Operable_Roof_Controller : Building
 
     public void updateConnectedBuildings()
     {
-        connectedBuildings = new List<Operable_Roof>();
+        connectedBuildings = [];
         foreach (var intVec3 in CellRect.CenteredOn(Position, 15))
         {
             foreach (var building in intVec3.GetThingList(Find.CurrentMap).ToList())

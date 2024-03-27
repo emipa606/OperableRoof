@@ -1,5 +1,8 @@
 # Changelog for OperableRoof
 
+1.5.0 - Mod updated for 1.5 and passed autotests
+
+
 1.4.6 - Added support for roofs made of stable overhead mountain from [url=https://steamcommunity.com/workshop/filedetails/?id=2038000893]Biomes! Core[/url]
 
 
