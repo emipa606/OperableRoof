@@ -1,4 +1,4 @@
-# OperableRoof
+# [Operable Roof (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=2896531741)
 
 ![Image](https://i.imgur.com/buuPQel.png)
 
@@ -6,7 +6,7 @@ Update of DRILLED_HEADs mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=2809986778
 
 - Added one buildable roof for each roof-type with hopefully balanced stats
-- Added a buildable roof that uses the ship-roof in https://steamcommunity.com/workshop/filedetails/?id=1909914131]Save Our Ship 2 if loaded
+- Added a buildable roof that uses the ship-roof in [Save Our Ship 2](https://steamcommunity.com/workshop/filedetails/?id=1909914131) if loaded
 - Added indicators to the controllers to show what roofs are connected
 - Added roof-size indicator when selected
 - Added option to change the roof-size per roof-pillar
@@ -14,7 +14,6 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2809986778
 - Added option to automatically close and open roofs based on temperature
 
 ![Image](https://i.imgur.com/pufA0kM.png)
-
 	
 ![Image](https://i.imgur.com/Z4GOv8H.png)
 
@@ -58,15 +57,12 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=867467808
 
 -  See if the the error persists if you just have this mod and its requirements active.
 -  If not, try adding your other mods until it happens again.
--  Post your error-log using https://steamcommunity.com/workshop/filedetails/?id=818773962]HugsLib or the standalone https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404]Uploader and command Ctrl+F12
+-  Post your error-log using [HugsLib](https://steamcommunity.com/workshop/filedetails/?id=818773962) or the standalone [Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404) and command Ctrl+F12
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
--  Use https://github.com/RimSort/RimSort/releases/latest]RimSort to sort your mods
+-  Use [RimSort](https://github.com/RimSort/RimSort/releases/latest) to sort your mods
 
+ 
 
-
-[
-
-https://steamcommunity.com/sharedfiles/filedetails/changelog/2896531741]![Image](https://img.shields.io/github/v/release/emipa606/OperableRoof?label=latest%20version&style=plastic&color=9f1111&labelColor=black)
-
+[![Image](https://img.shields.io/github/v/release/emipa606/OperableRoof?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2896531741) | tags:  automation

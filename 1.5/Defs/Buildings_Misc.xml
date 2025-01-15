@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <ThingDef Name="OperableRoofBase" ParentName="BuildingBase" Abstract="True">
     <thingClass>Operable_Roof.Operable_Roof</thingClass>
@@ -29,7 +29,6 @@
     <designationCategory>Structure</designationCategory>
     <staticSunShadowHeight>1.0</staticSunShadowHeight>
     <blockLight>true</blockLight>
-    <!-- <interactionCellOffset>(0,0,0)</interactionCellOffset> -->
     <hasInteractionCell>false</hasInteractionCell>
     <canOverlapZones>false</canOverlapZones>
     <fertility>0</fertility>
@@ -156,7 +155,7 @@
       </li>
     </comps>
   </ThingDef>
-  <ThingDef ParentName="OperableRoofBase" MayRequire="machine.rtr">
+  <ThingDef ParentName="OperableRoofBase" MayRequireAnyOf="machine.rtr,greysuki.rtr">
     <defName>Operable_Roofe</defName>
     <label>Operable Roof (steel roof)</label>
     <description>Operable Roof, uses steel roof</description>
@@ -177,7 +176,7 @@
       </li>
     </comps>
   </ThingDef>
-  <ThingDef ParentName="OperableRoofBase" MayRequire="machine.rtr">
+  <ThingDef ParentName="OperableRoofBase" MayRequireAnyOf="machine.rtr,greysuki.rtr">
     <defName>Operable_Rooff</defName>
     <label>Operable Roof (transparent roof)</label>
     <description>Operable Roof, uses transparent roof</description>

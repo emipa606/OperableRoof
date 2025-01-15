@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <RoofDef>
     <defName>OP_Roof</defName>
@@ -6,15 +6,5 @@
     <isThickRoof>false</isThickRoof>
     <filthLeaving>Filth_RubbleBuilding</filthLeaving>
     <soundPunchThrough>PunchThroughRoofMetal</soundPunchThrough>
-    <!--label>rock roof (thin)</label>
-    <isThickRoof>false</isThickRoof>
-    <isNatural>true</isNatural>
-    <filthLeaving>Filth_RubbleRock</filthLeaving>
-    <soundPunchThrough>Roof_Collapse</soundPunchThrough-->
-    <!--label>overhead mountain</label>
-    <isThickRoof>true</isThickRoof>
-    <isNatural>true</isNatural>
-    <collapseLeavingThingDef>CollapsedRocks</collapseLeavingThingDef>
-    <filthLeaving>Filth_RubbleRock</filthLeaving-->
   </RoofDef>
 </Defs>

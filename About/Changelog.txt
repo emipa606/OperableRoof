@@ -1,5 +1,8 @@
 # Changelog for OperableRoof
 
+1.5.1 - Updated compatibility with the Raise The Roof 1.5 reupload
+
+
 1.5.0 - Mod updated for 1.5 and passed autotests
 
 
