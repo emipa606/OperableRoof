@@ -11,6 +11,11 @@ public class PlaceWorker_OperatableRoofController : PlaceWorker
     {
         foreach (var intVec3 in CellRect.CenteredOn(center, 15))
         {
+            if (!intVec3.InBounds(Find.CurrentMap))
+            {
+                continue;
+            }
+
             foreach (var building in intVec3.GetThingList(Find.CurrentMap).ToList())
             {
                 if (building is Operable_Roof)

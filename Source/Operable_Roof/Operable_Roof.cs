@@ -11,11 +11,11 @@ public class Operable_Roof : Building
 {
     private const int updateEveryXTicks = 50;
 
-    public bool CLOSESET = true;
+    public bool Closed = true;
 
     private bool elonger;
 
-    public bool OPENSET = true;
+    public bool OpenSet = true;
 
     public CompPowerTrader Power;
 
@@ -62,11 +62,16 @@ public class Operable_Roof : Building
 
         foreach (var intVec3 in CellRect.CenteredOn(Position, range))
         {
+            if (!intVec3.InBounds(Find.CurrentMap))
+            {
+                continue;
+            }
+
             foreach (var building in intVec3.GetThingList(Find.CurrentMap).ToList())
             {
                 if (building is Operable_Roof_Controller operable_Roof_Controller)
                 {
-                    operable_Roof_Controller.updateConnectedBuildings();
+                    operable_Roof_Controller.UpdateConnectedBuildings();
                 }
             }
         }
@@ -79,6 +84,11 @@ public class Operable_Roof : Building
         {
             foreach (var intVec3 in CellRect.CenteredOn(Position, range))
             {
+                if (!intVec3.InBounds(Find.CurrentMap))
+                {
+                    continue;
+                }
+
                 Find.CurrentMap.roofGrid.SetRoof(intVec3, null);
             }
         }
@@ -99,6 +109,11 @@ public class Operable_Roof : Building
 
         foreach (var intVec3 in CellRect.CenteredOn(Position, range))
         {
+            if (!intVec3.InBounds(Find.CurrentMap))
+            {
+                continue;
+            }
+
             Find.CurrentMap.roofGrid.SetRoof(intVec3, roofToSet);
         }
     }
@@ -135,37 +150,42 @@ public class Operable_Roof : Building
         }
     }
 
-    private void OPEN()
-    {
-        OPENSET = !OPENSET;
-    }
-
-    private void CLOSE()
-    {
-        CLOSESET = !CLOSESET;
-    }
-
-    private void OpenAnimation()
+    private void openAnimation()
     {
         var radius = timer;
         foreach (var intVec3 in CellRect.CenteredOn(Position, radius))
         {
+            if (!intVec3.InBounds(Find.CurrentMap))
+            {
+                continue;
+            }
+
             Find.CurrentMap.roofGrid.SetRoof(intVec3, null);
             FloodFillerFog.FloodUnfog(intVec3, Find.CurrentMap);
         }
     }
 
-    private void CloseAnimation()
+    private void closeAnimation()
     {
         var num = timer;
         var num2 = range - num;
         foreach (var intVec3 in CellRect.CenteredOn(Position, num2))
         {
+            if (!intVec3.InBounds(Find.CurrentMap))
+            {
+                continue;
+            }
+
             Find.CurrentMap.roofGrid.SetRoof(intVec3, roofToSet);
         }
 
         foreach (var intVec3 in CellRect.CenteredOn(Position, num2 - 1))
         {
+            if (!intVec3.InBounds(Find.CurrentMap))
+            {
+                continue;
+            }
+
             Find.CurrentMap.roofGrid.SetRoof(intVec3, null);
         }
     }
@@ -182,7 +202,7 @@ public class Operable_Roof : Building
         Scribe_Values.Look(ref range, "range", 5);
     }
 
-    public override void Tick()
+    protected override void Tick()
     {
         base.Tick();
         elonger = !elonger;
@@ -191,26 +211,26 @@ public class Operable_Roof : Building
             return;
         }
 
-        if (!CLOSESET)
+        if (!Closed)
         {
             var power = Power;
             if (power is { PowerOn: false })
             {
                 Messages.Message("CannotUseNoPower".Translate(), MessageTypeDefOf.RejectInput);
-                CLOSESET = true;
+                Closed = true;
                 return;
             }
 
-            CloseAnimation();
+            closeAnimation();
             timer++;
             if (timer > range)
             {
-                CLOSESET = true;
+                Closed = true;
                 timer = 0;
             }
         }
 
-        if (OPENSET)
+        if (OpenSet)
         {
             return;
         }
@@ -219,18 +239,18 @@ public class Operable_Roof : Building
         if (power2 is { PowerOn: false })
         {
             Messages.Message("CannotUseNoPower".Translate(), MessageTypeDefOf.RejectInput);
-            OPENSET = true;
+            OpenSet = true;
             return;
         }
 
-        OpenAnimation();
+        openAnimation();
         timer++;
         if (timer <= range)
         {
             return;
         }
 
-        OPENSET = true;
+        OpenSet = true;
         timer = 0;
     }
 }

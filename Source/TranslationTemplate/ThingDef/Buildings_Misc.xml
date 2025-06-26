@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: Operable Roof Controller -->
+  <Operable_Roof_Controller.label>Operable Roof Controller</Operable_Roof_Controller.label>
+  <!-- EN: Operable_Roof -->
+  <Operable_Roof_Controller.description>Operable_Roof</Operable_Roof_Controller.description>
+  <!-- EN: Operable Roof (constructed roof) -->
+  <Operable_Roofa.label>Operable Roof (constructed roof)</Operable_Roofa.label>
+  <!-- EN: Operable Roof, uses normal constructed roof -->
+  <Operable_Roofa.description>Operable Roof, uses normal constructed roof</Operable_Roofa.description>
+  <!-- EN: Operable Roof (rockroof thin) -->
+  <Operable_Roofb.label>Operable Roof (rockroof thin)</Operable_Roofb.label>
+  <!-- EN: Operable Roof, uses thin rock roof -->
+  <Operable_Roofb.description>Operable Roof, uses thin rock roof</Operable_Roofb.description>
+  <!-- EN: Operable Roof (rockroof thick) -->
+  <Operable_Roofc.label>Operable Roof (rockroof thick)</Operable_Roofc.label>
+  <!-- EN: Operable Roof, uses thick rock roof -->
+  <Operable_Roofc.description>Operable Roof, uses thick rock roof</Operable_Roofc.description>
+</LanguageData>
