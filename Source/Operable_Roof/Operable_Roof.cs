@@ -13,11 +13,11 @@ public class Operable_Roof : Building
 
     public bool Closed = true;
 
-    private bool elonger;
-
     public bool OpenSet = true;
 
     public CompPowerTrader Power;
+
+    private bool elonger;
 
     private int range = 5;
 

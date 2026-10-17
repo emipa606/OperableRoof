@@ -3,4 +3,17 @@
     <BuildType Name="Release" />
   </Configurations>
   <Project Path="Operable_Roof/Operable_Roof.csproj" />
+  <Folder Name="/.github/">
+    <File Path="../.github/copilot-instructions.md" />
+  </Folder>
+  <Folder Name="/XML/About/">
+    <File Path="../About/about.xml" />
+  </Folder>
+  <Folder Name="/XML/Languages/English/Keyed/">
+    <File Path="../Languages/English/Keyed/Keys.xml" />
+  </Folder>
+  <Folder Name="/XML/1.7/Defs/">
+    <File Path="../1.7/Defs/Buildings_Misc.xml" />
+    <File Path="../1.7/Defs/Roofs.xml" />
+  </Folder>
 </Solution>

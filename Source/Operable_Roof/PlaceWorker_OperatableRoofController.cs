@@ -16,12 +16,9 @@ public class PlaceWorker_OperatableRoofController : PlaceWorker
                 continue;
             }
 
-            foreach (var building in intVec3.GetThingList(Find.CurrentMap).ToList())
+            foreach (var building in intVec3.GetThingList(Find.CurrentMap).Where(b => b is Operable_Roof).ToList())
             {
-                if (building is Operable_Roof)
-                {
-                    GenDraw.DrawLineBetween(building.TrueCenter(), center.ToVector3());
-                }
+                GenDraw.DrawLineBetween(building.TrueCenter(), center.ToVector3());
             }
         }
     }
